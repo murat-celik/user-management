@@ -18,7 +18,7 @@ class UserModule extends \yii\base\Module
     public function init()
     {
         parent::init();
-
+        $this->layout = "@app/modules/user/views/layouts/main";
         // custom initialization code goes here
     }
 }
