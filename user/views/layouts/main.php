@@ -67,6 +67,15 @@ use app\modules\user\assets\AppUserAsset;
     </div>
 
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3><?= $this->title; ?></h3>
+            </div>
+            <div class="col-sm-6 text-right">
+                <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [], 'homeLink' => [ 'label' => Yii::t('yii', 'Home'), 'url' => 'index.php?r=usermanagemant']]); ?>
+            </div>
+        </div>
+
         <?= $content ?>
     </div>
 </div>
