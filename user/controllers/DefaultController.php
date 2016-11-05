@@ -2,12 +2,12 @@
 
 namespace app\modules\user\controllers;
 
-use yii\web\Controller;
+use app\modules\user\components\RootController;
 
 /**
  * Default controller for the `user` module
  */
-class DefaultController extends Controller
+class DefaultController extends RootController
 {
     /**
      * Renders the index view for the module
