@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'tableOptions' => ['class' => 'table striped hovered cell-hovered border bordered'],
+        //'tableOptions' => ['class' => 'table striped hovered cell-hovered border bordered'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',

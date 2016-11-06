@@ -13,14 +13,18 @@ class AppUserAsset extends AssetBundle {
         'yii\bootstrap\BootstrapAsset',
     ];
     public $css = [
-        'css/metro.min.css',
-        'css/metro-icons.min.css',
-        'css/metro-responsive.css',
-        'css/metro-schemes.css',
-        'style.css',
+        'css/metismenu.css',
+        'css/sb-admin-2.css',
+        'css/font-awesome/css/font-awesome.min.css',
+        'css/site.css',
+        
     ];
     public $js = [
-        'js/metro.js',
+        'js/bootstrap.js',
+        'js/metisMenu.js',
+        'js/sb-admin-2.js',
+        'js/site.js',
     ];
+    
 
 }
