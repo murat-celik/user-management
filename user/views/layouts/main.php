@@ -43,7 +43,7 @@ use app\modules\user\assets\AppUserAsset;
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i> ( Admin<?php //  Yii::$app->user->identity->fullname    ?>)
+                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i> ( Admin<?php //  Yii::$app->user->identity->fullname      ?>)
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="<?= \yii\helpers\Url::to(['user/profile']) ?>"><i class="fa fa-user fa-fw"></i> Profil</a></li>
@@ -62,6 +62,15 @@ use app\modules\user\assets\AppUserAsset;
                     <li><a href="<?= Url::to(['user/index']) ?>"><i class="fa fa-users fa-fw" ></i>&nbsp;USERS</a></li>
                     <li><a href="<?= Url::to(['post/project']) ?>"><i class="fa fa-cubes fa-fw" ></i>&nbsp;ROLES</a></li>
                     <li><a href="<?= Url::to(['post/page']) ?>">   <i class="fa fa-cube fa-fw"></i>&nbsp;PERMISSIONS</a></li>
+                    <li>
+                        <a href="#"> <i class="fa fa-sitemap  fa-fw"></i>&nbsp;Create <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+
+                            <li><a href="<?= Url::to(['user/create']) ?>"><i class="fa  fa-user fa-fw"></i>&nbsp;User</a></li>
+                            <li><a href="<?= Url::to(['authitem/create']) ?>"><i class="fa  fa-cubes  fa-fw"></i>&nbsp;Role</a></li>
+
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -64,4 +64,8 @@ class User extends \yii\db\ActiveRecord
             'datetime_update' => 'Datetime Update',
         ];
     }
+    
+    public function getFullname() {
+        return $this->firstname.' '.$this->lastname;
+    }
 }

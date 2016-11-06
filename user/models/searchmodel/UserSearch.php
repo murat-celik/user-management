@@ -1,10 +1,11 @@
 <?php
 
-namespace app\modules\user\models;
+namespace app\modules\user\models\searchmodel;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+
 use app\modules\user\models\User;
 
 /**
