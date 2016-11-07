@@ -22,21 +22,22 @@ use Yii;
  * @property AuthItem[]       $children
  * @property AuthItem[]       $parents
  */
-class AuthItem extends \yii\db\ActiveRecord
-{
+class AuthItem extends \yii\db\ActiveRecord {
+
+    const TYPE_ROLE = 1;
+    const TYPE_PERMISSION = 2;
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'auth_item';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['name', 'type'], 'required'],
             [['type', 'created_at', 'updated_at'], 'integer'],
@@ -49,8 +50,7 @@ class AuthItem extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'name' => 'Name',
             'type' => 'Type',
@@ -65,48 +65,43 @@ class AuthItem extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAuthAssignments()
-    {
+    public function getAuthAssignments() {
         return $this->hasMany(AuthAssignment::className(), ['item_name' => 'name']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRuleName()
-    {
+    public function getRuleName() {
         return $this->hasOne(AuthRule::className(), ['name' => 'rule_name']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAuthItemChildren()
-    {
+    public function getAuthItemChildren() {
         return $this->hasMany(AuthItemChild::className(), ['parent' => 'name']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAuthItemChildren0()
-    {
+    public function getAuthItemChildren0() {
         return $this->hasMany(AuthItemChild::className(), ['child' => 'name']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getChildren()
-    {
+    public function getChildren() {
         return $this->hasMany(AuthItem::className(), ['name' => 'child'])->viaTable('auth_item_child', ['parent' => 'name']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getParents()
-    {
+    public function getParents() {
         return $this->hasMany(AuthItem::className(), ['name' => 'parent'])->viaTable('auth_item_child', ['child' => 'name']);
     }
+
 }

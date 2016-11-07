@@ -60,7 +60,7 @@ use app\modules\user\assets\AppUserAsset;
                 <ul class="nav" id="side-menu">
                     <li><a href="<?= Url::to(['default/index']) ?>"><i class="fa fa-dashboard fa-fw"></i>&nbsp;DASHBOARD</a></li>
                     <li><a href="<?= Url::to(['user/index']) ?>"><i class="fa fa-users fa-fw" ></i>&nbsp;USERS</a></li>
-                    <li><a href="<?= Url::to(['post/project']) ?>"><i class="fa fa-cubes fa-fw" ></i>&nbsp;ROLES</a></li>
+                    <li><a href="<?= Url::to(['role/index']) ?>"><i class="fa fa-cubes fa-fw" ></i>&nbsp;ROLES</a></li>
                     <li><a href="<?= Url::to(['post/page']) ?>">   <i class="fa fa-cube fa-fw"></i>&nbsp;PERMISSIONS</a></li>
                     <li>
                         <a href="#"> <i class="fa fa-sitemap  fa-fw"></i>&nbsp;Create <span class="fa arrow"></span></a>
