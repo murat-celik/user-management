@@ -118,8 +118,12 @@ class RoleController extends Controller {
 
     public function actionAssingchildrole($id) {
         $roles = AuthItem::find()->all();
-        
+
         return $this->render('assingchildrole', ['roles' => $roles]);
+    }
+
+    public function actionAssingpermission($id) {
+        return $this->render('assingpermission', ['routes' => AuthItem::getRoutes()]);
     }
 
 }
