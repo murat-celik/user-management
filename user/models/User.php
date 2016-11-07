@@ -3,6 +3,7 @@
 namespace app\modules\user\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "user".
@@ -20,21 +21,19 @@ use Yii;
  * @property string  $datetime_create
  * @property string  $datetime_update
  */
-class User extends \yii\db\ActiveRecord
-{
+class User extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'user';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['firstname', 'lastname', 'username', 'password'], 'required'],
             [['status', 'super_admin'], 'boolean'],
@@ -49,8 +48,7 @@ class User extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'firstname' => 'Firstname',
@@ -62,10 +60,25 @@ class User extends \yii\db\ActiveRecord
             'email' => 'Email',
             'datetime_create' => 'Datetime Create',
             'datetime_update' => 'Datetime Update',
+            'roles' => 'Roles',
+            'renderRoles' => 'Roles'
         ];
     }
-    
+
     public function getFullname() {
-        return $this->firstname.' '.$this->lastname;
+        return $this->firstname . ' ' . $this->lastname;
     }
+
+    public function getRoles() {
+        return AuthItem::find(['id_user' => $this->id])->all();
+    }
+
+    public function getRenderRoles($seperator = ', ') {
+        $data = array();
+        foreach (ArrayHelper::map($this->roles, 'name', 'name') as $item) {
+            $data[] = '<label class="label label-success">' . $item . '</label>';
+        }
+        return implode($seperator, $data);
+    }
+
 }

@@ -13,27 +13,31 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-view">
     <p class="pull-right">
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?=
+        Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
-        ]) ?>
+        ])
+        ?>
     </p>
-    <?= DetailView::widget([
+    <?=
+    DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
             'firstname',
             'lastname',
             'username',
-            'password',
             'status:boolean',
             'super_admin:boolean',
             'email:email',
             'datetime_create',
             'datetime_update',
+            array('format' => 'raw', 'attribute' => 'renderRoles', 'value' => $model->getRenderRoles(' ')),
         ],
-    ]) ?>
+    ])
+    ?>
 </div>
