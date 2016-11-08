@@ -3,11 +3,13 @@
 namespace app\modules\user\controllers;
 
 use Yii;
-use app\modules\user\models\AuthItem;
-use app\modules\user\models\searchmodel\AuthItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use app\modules\user\models\AuthItemChild;
+use app\modules\user\models\AuthItem;
+use app\modules\user\models\searchmodel\AuthItemSearch;
 
 /**
  * RoleController implements the CRUD actions for AuthItem model.
@@ -118,12 +120,51 @@ class RoleController extends Controller {
 
     public function actionAssingchildrole($id) {
         $roles = AuthItem::find()->all();
-
         return $this->render('assingchildrole', ['roles' => $roles]);
     }
 
     public function actionAssingpermission($id) {
-        return $this->render('assingpermission', ['routes' => AuthItem::getRoutes()]);
+        $routes = AuthItem::getRoutes();
+        $childRoles = Yii::$app->authManager->getChildRoles($id);
+        $childRoles = isset($childRoles) ? ArrayHelper::map($childRoles, 'name', 'name') : [];
+
+        $childPermission = Yii::$app->authManager->getPermissionsByRole($id);
+        $childPermission = $childPermission ? ArrayHelper::map($childPermission, 'name', 'name') : [];
+
+        return $this->render('assingpermission', ['role' => $id, 'routes' => $routes, 'childRoles' => $childRoles, 'childPermission' => $childPermission]);
     }
 
+    public function actionCreatepermission($id) {
+        if (Yii::$app->request->isPost) {
+            $name = $_POST['name'];
+
+            if (AuthItem::find()->where(['name' => $name])->exists() == FALSE) {
+                $newPermission = new AuthItem();
+                $newPermission->name = $name;
+                $newPermission->type = AuthItem::TYPE_PERMISSION;
+                $newPermission->save();
+            }
+
+            $newAddChild = new AuthItemChild();
+            $newAddChild->parent = $id;
+            $newAddChild->child = $name;
+            $newAddChild->save();
+
+            echo json_encode(['status' => 1, 'data' => ['name' => $name]]);
+        } else {
+            echo json_encode(['status' => 0]);
+        }
+    }
+
+    public function actionDeletepermission($id) {
+        if (Yii::$app->request->isPost) {
+            
+            $model = AuthItemChild::find()->where(['parent'=>$id,'child'=>$_POST["name"]])->one();
+            $model->delete();
+            
+            echo json_encode(['status' => 1]);
+        } else {
+            echo json_encode(['status' => 0]);
+        }
+    }
 }
