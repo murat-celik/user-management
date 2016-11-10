@@ -35,6 +35,7 @@ class UserIdentity extends User implements IdentityInterface {
     }
 
     public function getAuthKey() {
+        return "11651241";
         throw new \yii\base\NotSupportedException;
     }
 

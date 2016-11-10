@@ -3,7 +3,6 @@
 namespace app\modules\user\controllers;
 
 use Yii;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
@@ -13,10 +12,12 @@ use app\modules\user\models\AuthAssignment;
 use app\modules\user\models\User;
 use app\modules\user\models\searchmodel\UserSearch;
 
+use app\modules\user\components\RootController;
+
 /**
  * UserController implements the CRUD actions for User model.
  */
-class UserController extends Controller {
+class AdminController extends RootController {
 
     /**
      * @inheritdoc
@@ -94,20 +95,19 @@ class UserController extends Controller {
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $existingRoles = $model->getRoles(true);
-            
-             $updatedRoles = [];
-                if (isset($_POST['roles']) && count($_POST['roles']) > 0) {
-                    foreach ($_POST['roles'] as $key => $item) {
-                        $updatedRoles[$key] = $key;
-                    }
+
+            $updatedRoles = [];
+            if (isset($_POST['roles']) && count($_POST['roles']) > 0) {
+                foreach ($_POST['roles'] as $key => $item) {
+                    $updatedRoles[$key] = $key;
                 }
+            }
             
             if (is_array($existingRoles)) {
-               
+                $removedRoles = array_diff($existingRoles, $updatedRoles);
+            }
 
-                if (is_array($existingRoles)) {
-                    $removedRoles = array_diff($existingRoles, $updatedRoles);
-                }
+            if (is_array($existingRoles)) {
                 $newRoles = array_diff($updatedRoles, $existingRoles);
             }
 

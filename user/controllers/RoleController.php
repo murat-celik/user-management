@@ -3,18 +3,21 @@
 namespace app\modules\user\controllers;
 
 use Yii;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+
+//models
 use app\modules\user\models\AuthItemChild;
 use app\modules\user\models\AuthItem;
 use app\modules\user\models\searchmodel\AuthItemSearch;
 
+use app\modules\user\components\RootController;
+
 /**
  * RoleController implements the CRUD actions for AuthItem model.
  */
-class RoleController extends Controller {
+class RoleController extends RootController {
 
     /**
      * @inheritdoc
