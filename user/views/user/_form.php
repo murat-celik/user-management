@@ -17,16 +17,21 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'lastname')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-            
-            <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+            <div class="row">
+                <div class="col-lg-6">
+                    <?= $form->field($model, 'status')->dropDownList(array( 1 => 'Active',0 => 'Passive')); ?>
+                </div>
+                <div class="col-lg-6">
+                    <?= $form->field($model, 'super_admin')->dropDownList(array(0 => 'No', 1 => 'Yes')); ?>
+                </div>
+            </div>
         </div>
         <div class="col-lg-6">
-            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-            
-            <?= $form->field($model, 'status')->dropDownList(array(0 => 'Passive', 1 => 'Active')); ?>
+            <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'super_admin')->dropDownList(array(0 => 'Yes', 1 => 'No')); ?>
+            <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-lg-12">
             <h4 class="control-label">Roles</h4>
@@ -38,23 +43,17 @@ use yii\widgets\ActiveForm;
                         <th>Description</th>
                     </tr>
                 </thead>
-                <tbody>
+                <?php foreach ($roles as $item): ?>
                     <tr>
-                        <td><input type="checkbox"/></td>
-                <td>Admin</td>
-                <td>Lorem Ipsum</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>Admin</td>
-                    <td>Lorem Ipsum</td>
+                       <?php  if($model->isNewRecord):?>
+                        <td><input type="checkbox" name="roles[<?=$item->name?>]"/></td>
+                        <?php else:?>
+                            <td><input type="checkbox" name="roles[<?=$item->name?>]" <?= in_array($item->name, $userRoles) ? 'checked' : "" ?> /></td>
+                        <?php endif;?>
+                        <td><?= $item->name ?></td>
+                        <td><?= $item->description ?></td>
                     </tr>
-                    <tr>
-                        <td><input type="checkbox"/></td>
-                    <td>Admin</td>
-                    <td>Lorem Ipsum</td>
-                    </tr>
-                    </tbody>
+                <?php endforeach; ?>
             </table>
         </div>
     </div>

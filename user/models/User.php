@@ -4,6 +4,7 @@ namespace app\modules\user\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use app\modules\user\models\AuthAssignment;
 
 /**
  * This is the model class for table "user".
@@ -22,6 +23,8 @@ use yii\helpers\ArrayHelper;
  * @property string  $datetime_update
  */
 class User extends \yii\db\ActiveRecord {
+
+    public $_roles = null;
 
     /**
      * @inheritdoc
@@ -69,13 +72,17 @@ class User extends \yii\db\ActiveRecord {
         return $this->firstname . ' ' . $this->lastname;
     }
 
-    public function getRoles() {
-        return AuthItem::find(['id_user' => $this->id])->all();
+    public function getRoles($array = FALSE) {
+        $roles = AuthAssignment::find()->where(['user_id' => $this->id])->all();
+        if ($array) {
+            return isset($roles) ? ArrayHelper::map($roles, 'item_name', 'item_name') : [];
+        }
+        return $roles;
     }
 
     public function getRenderRoles($seperator = ', ') {
         $data = array();
-        foreach (ArrayHelper::map($this->roles, 'name', 'name') as $item) {
+        foreach ($this->getRoles(true) as $item) {
             $data[] = '<label class="label label-success">' . $item . '</label>';
         }
         return implode($seperator, $data);
