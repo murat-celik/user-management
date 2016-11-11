@@ -43,5 +43,25 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ])
     ?>
-
+    <div class="row">
+        <div class="col-lg-12">
+            <h4 class="control-label">Roles</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="col-lg-2 col-xs-3">Role</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <?php foreach ($childRoles as $key=>$item): ?>
+                    <?php if($item->name !=$model->name):?>
+                        <tr>
+                            <td><?= $item->name ?></td>
+                            <td><?= $item->description ?></td>
+                        </tr>
+                    <?php endif;?>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
 </div>

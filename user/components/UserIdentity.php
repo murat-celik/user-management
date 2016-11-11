@@ -40,6 +40,7 @@ class UserIdentity extends User implements IdentityInterface {
     }
 
     public function validateAuthKey($authKey) {
+          return "11651241";
         throw new \yii\base\NotSupportedException;
     }
 

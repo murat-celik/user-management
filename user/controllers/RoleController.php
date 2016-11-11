@@ -54,8 +54,10 @@ class RoleController extends RootController {
      * @return mixed
      */
     public function actionView($id) {
+        $childRoles = Yii::$app->authManager->getChildRoles($id);
         return $this->render('view', [
                     'model' => $this->findModel($id),
+                    'childRoles'=>$childRoles
         ]);
     }
 
