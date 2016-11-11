@@ -10,8 +10,8 @@ use yii\helpers\ArrayHelper;
 //models
 use app\modules\user\models\AuthItemChild;
 use app\modules\user\models\AuthItem;
+use app\modules\user\models\User;
 use app\modules\user\models\searchmodel\AuthItemSearch;
-
 use app\modules\user\components\RootController;
 
 /**
@@ -122,8 +122,58 @@ class RoleController extends RootController {
     }
 
     public function actionAssingchildrole($id) {
-        $roles = AuthItem::find()->all();
-        return $this->render('assingchildrole', ['roles' => $roles]);
+       // $roles = AuthItem::find()->all();
+        
+        $model = $this->findModel($id);
+         if ( isset($_POST) && count($_POST)>0) {
+
+            $existingChildRoles =  Yii::$app->authManager->getChildRoles($id);
+            $existingChildRoles =  isset($existingChildRoles) ? ArrayHelper::map($existingChildRoles , 'name', 'name') : [];
+            unset($existingChildRoles[$id]);  
+
+            $updatedRoles = [];
+            if (isset($_POST['roles']) && count($_POST['roles']) > 0) {
+                foreach ($_POST['roles'] as $key => $item) {
+                    $updatedRoles[$key] = $key;
+                }
+            }
+            
+            if (is_array($existingChildRoles)) {
+                $removedRoles = array_diff($existingChildRoles, $updatedRoles);
+            }
+
+            if (is_array($existingChildRoles)) {
+                $newRoles = array_diff($updatedRoles, $existingChildRoles);
+            }
+
+            if (!empty($removedRoles)) {
+                AuthItemChild::deleteAll(['and', 'parent = :p1', ['in', 'child', $removedRoles]], [':p1' => $model->name]);
+            }
+
+            if (!empty($newRoles)) {
+                foreach ($newRoles as $value) {
+                    $authItemChild = new AuthItemChild();
+                    $authItemChild ->parent = $model->name;
+                    $authItemChild ->child = $value;
+                    $authItemChild ->save();
+                }
+            }
+
+            return $this->redirect(['view', 'id' => $model->name]);
+
+        } 
+        else {
+            $roles = AuthItem::find()->where(['type' => AuthItem::TYPE_ROLE])->all();
+                    $childRoles = Yii::$app->authManager->getChildRoles($id);
+                    $childRoles =ArrayHelper::map($childRoles , 'name', 'name');
+                    unset($childRoles[$id]);
+            return $this->render('assingchildrole', [
+                        'model' => $model,
+                        'roles' => $roles,
+                        'childRoles' => $childRoles,
+            ]);
+        }
+        
     }
 
     public function actionAssingpermission($id) {
