@@ -65,7 +65,7 @@ use app\modules\user\assets\AppUserAsset;
                         <a href="#"> <i class="fa fa-sitemap  fa-fw"></i>&nbsp;Create <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
 
-                            <li><a href="<?= Url::to(['user/create']) ?>"><i class="fa  fa-user fa-fw"></i>&nbsp;User</a></li>
+                            <li><a href="<?= Url::to(['admin/create']) ?>"><i class="fa  fa-user fa-fw"></i>&nbsp;User</a></li>
                             <li><a href="<?= Url::to(['role/create']) ?>"><i class="fa  fa-cubes  fa-fw"></i>&nbsp;Role</a></li>
 
                         </ul>
