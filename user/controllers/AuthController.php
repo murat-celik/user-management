@@ -37,7 +37,7 @@ class AuthController extends RootController {
     }
 
     public function goHome() {
-        return $this->redirect(['/user/admin/index']);
+        return $this->redirect(Yii::$app->homeUrl);
     }
 
     public function actionProfile() {

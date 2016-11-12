@@ -1,11 +1,29 @@
 <?php
+
 namespace app\modules\user\components;
 
 use Yii;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
+use yii\filters\AccessControl;
 
 class RootController extends Controller {
+
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
 
     public function beforeAction($action) {
 
@@ -25,7 +43,7 @@ class RootController extends Controller {
         if (Yii::$app->user->Identity->isSuperAdmin) {
             return true;
         }
-
+        
         if (Yii::$app->user->can(str_replace('/', '.', $this->route))) {
             return true;
         } else {
