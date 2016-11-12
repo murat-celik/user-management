@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
     <div class="row">
         <div class="col-lg-12">
-            <h4 class="control-label">Roles</h4>
+            <h4 class="control-label">Child Roles</h4>
             <table class="table table-bordered">
                 <thead>
                     <tr>

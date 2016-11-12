@@ -11,7 +11,6 @@ use app\modules\user\models\AuthItem;
 use app\modules\user\models\AuthAssignment;
 use app\modules\user\models\User;
 use app\modules\user\models\searchmodel\UserSearch;
-
 use app\modules\user\components\RootController;
 
 /**
@@ -91,9 +90,13 @@ class AdminController extends RootController {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
+            if (preg_match('/^[a-f0-9]{32}$/', $model->password) == 0) {
+                $model->password = md5($model->password);
+                $model->save();
+            }
             $existingRoles = $model->getRoles(true);
 
             $updatedRoles = [];
@@ -102,7 +105,7 @@ class AdminController extends RootController {
                     $updatedRoles[$key] = $key;
                 }
             }
-            
+
             if (is_array($existingRoles)) {
                 $removedRoles = array_diff($existingRoles, $updatedRoles);
             }

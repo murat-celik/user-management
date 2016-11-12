@@ -30,6 +30,7 @@ class User extends \yii\db\ActiveRecord {
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
                 $this->auth_key = Yii::$app->security->generateRandomString();
+                $this->password = md5(strval($this->password));
             }
             return true;
         }

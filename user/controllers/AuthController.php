@@ -16,6 +16,7 @@ class AuthController extends RootController {
     public $defaultRoute = 'login';
 
     public function actionLogin() {
+        
         $this->layout = "@app/modules/user/views/layouts/login_layout";
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();

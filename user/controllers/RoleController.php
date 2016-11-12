@@ -68,7 +68,8 @@ class RoleController extends RootController {
      */
     public function actionCreate() {
         $model = new AuthItem();
-
+        $model->type = AuthItem::TYPE_ROLE;
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->name]);
         } else {
