@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\user\models\AuthItem */
@@ -14,13 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p class="pull-right">
 
-        <?= Html::a('Assing Child Role', ['assingchildrole',  'id' => $model->name],  ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Assing Permission', ['assingpermission', 'id' => $model->name],  ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Update', ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Child Roles', ['childroles', 'id' => $model->name], ['class' => 'btn btn-xs btn-success ']) ?>
+        <?= Html::a('Permissions', ['permissions', 'id' => $model->name], ['class' => 'btn btn-xs btn-success ']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->name], ['class' => 'btn btn-xs btn-primary']) ?>
 
         <?=
         Html::a('Delete', ['delete', 'id' => $model->name], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-xs btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
@@ -49,17 +50,22 @@ $this->params['breadcrumbs'][] = $this->title;
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th class="col-lg-2 col-xs-3">Role</th>
+                        <th class="col-lg-2 col-xs-3">Name</th>
                         <th>Description</th>
                     </tr>
                 </thead>
-                <?php foreach ($childRoles as $key=>$item): ?>
-                    <?php if($item->name !=$model->name):?>
+                <?php foreach ($childRoles as $key => $item): ?>
+                    <?php if ($item->name != $model->name): ?>
                         <tr>
-                            <td><?= $item->name ?></td>
+                            <td>
+                                <span><?= $item->name ?></span>
+                                <a href="<?= Url::to(['role/permissions', 'id' => $item->name]); ?>">
+                                    <i class="fa fa-pencil-square-o pull-right" aria-hidden="true"></i>
+                                </a>
+                            </td>
                             <td><?= $item->description ?></td>
                         </tr>
-                    <?php endif;?>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </table>
         </div>

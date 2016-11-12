@@ -10,6 +10,7 @@ use app\modules\user\models\AuthItem;
 $this->title = 'Assing Permission :' . $role;
 $this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $role;
+
 ?>
 
 <div class="assing-rermission-view row">
@@ -21,7 +22,7 @@ $this->params['breadcrumbs'][] = $role;
             <div class="panel-body">
                 <table class="table">
                     <?php foreach ($childRoles as $value): ?>
-                        <tr><td><a>   <?= $value ?> <a href="<?= Url::to(['role/assingpermission', 'id' => $value]) ?>"> <i class="fa fa-pencil-square-o pull-right" aria-hidden="true"></i></a></td></tr>
+                        <tr><td><a href="<?= Url::to(['role/permissions', 'id' => $value]); ?>"><?= $value ?>  <i class="fa fa-pencil-square-o pull-right" aria-hidden="true"></i></a></td></tr>
                     <?php endforeach; ?>
                 </table>
             </div> 

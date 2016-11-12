@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="auth-item-index">
 
     <p class="pull-right">
-        <?= Html::a('Create Role', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Role', ['create'], ['class' => 'btn btn-xs btn-success']) ?>
     </p>
     <?=
     GridView::widget([
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',
-                'contentOptions' => ['style' => 'width:80px;'],
+                'contentOptions' => ['style' => 'width:70px;'],
             ],
         ],
     ]);

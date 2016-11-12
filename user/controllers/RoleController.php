@@ -123,9 +123,7 @@ class RoleController extends RootController {
         }
     }
 
-    public function actionAssingchildrole($id) {
-       // $roles = AuthItem::find()->all();
-        
+    public function actionChildroles($id) {
         $model = $this->findModel($id);
          if ( isset($_POST) && count($_POST)>0) {
 
@@ -169,7 +167,7 @@ class RoleController extends RootController {
                     $childRoles = Yii::$app->authManager->getChildRoles($id);
                     $childRoles =ArrayHelper::map($childRoles , 'name', 'name');
                     unset($childRoles[$id]);
-            return $this->render('assingchildrole', [
+            return $this->render('childroles', [
                         'model' => $model,
                         'roles' => $roles,
                         'childRoles' => $childRoles,
@@ -178,7 +176,7 @@ class RoleController extends RootController {
         
     }
 
-    public function actionAssingpermission($id) {
+    public function actionPermissions($id) {
         $routes = AuthItem::getRoutes();
         $childRoles = Yii::$app->authManager->getChildRoles($id);
         $childRoles = isset($childRoles) ? ArrayHelper::map($childRoles, 'name', 'name') : [];
@@ -186,7 +184,7 @@ class RoleController extends RootController {
         $childPermission = Yii::$app->authManager->getPermissionsByRole($id);
         $childPermission = $childPermission ? ArrayHelper::map($childPermission, 'name', 'name') : [];
 
-        return $this->render('assingpermission', ['role' => $id, 'routes' => $routes, 'childRoles' => $childRoles, 'childPermission' => $childPermission]);
+        return $this->render('permissions', ['role' => $id, 'routes' => $routes, 'childRoles' => $childRoles, 'childPermission' => $childPermission]);
     }
 
     public function actionCreatepermission($id) {
