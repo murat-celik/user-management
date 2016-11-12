@@ -3,6 +3,7 @@ namespace app\modules\user\components;
 
 use Yii;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 
 class RootController extends Controller {
 

@@ -66,11 +66,13 @@ class AdminController extends RootController {
         $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            foreach ($_POST['roles'] as $key => $value) {
-                $authAssignment = new AuthAssignment();
-                $authAssignment->item_name = $key;
-                $authAssignment->user_id = strval($model->id);
-                $authAssignment->save();
+            if (isset($_POST['roles']) && count($_POST['roles']) > 0) {
+                foreach ($_POST['roles'] as $key => $value) {
+                    $authAssignment = new AuthAssignment();
+                    $authAssignment->item_name = $key;
+                    $authAssignment->user_id = strval($model->id);
+                    $authAssignment->save();
+                }
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -90,7 +92,7 @@ class AdminController extends RootController {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-        
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             if (preg_match('/^[a-f0-9]{32}$/', $model->password) == 0) {
