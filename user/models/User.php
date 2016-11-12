@@ -12,19 +12,29 @@ use app\modules\user\models\AuthAssignment;
  * @property integer $id
  * @property string  $firstname
  * @property string  $lastname
+ * 
  * @property string  $username
  * @property string  $password
- * 
- * @property boolean $status
- * @property boolean $super_admin
  * @property string  $email
  * 
+ * @property string  $auth_key
+ * @property boolean $status
+ * @property boolean $super_admin
+ *  
  * @property string  $datetime_create
  * @property string  $datetime_update
  */
 class User extends \yii\db\ActiveRecord {
 
-    public $_roles = null;
+    public function beforeSave($insert) {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->auth_key = Yii::$app->security->generateRandomString();
+            }
+            return true;
+        }
+        return false;
+    }
 
     /**
      * @inheritdoc
@@ -43,8 +53,10 @@ class User extends \yii\db\ActiveRecord {
             [['datetime_create', 'datetime_update'], 'safe'],
             [['firstname', 'lastname', 'username', 'email'], 'string', 'max' => 128],
             [['password'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 1024],
             [['username'], 'unique'],
             [['email'], 'unique'],
+            [['email'], 'email'],
         ];
     }
 
@@ -53,16 +65,21 @@ class User extends \yii\db\ActiveRecord {
      */
     public function attributeLabels() {
         return [
-            'id' => 'ID',
+            'id' => 'Id',
             'firstname' => 'Firstname',
             'lastname' => 'Lastname',
+            
             'username' => 'Username',
             'password' => 'Password',
+            'email' => 'Email',
+            
+            'auth_key' => 'Auth Key',
             'status' => 'Status',
             'super_admin' => 'Super Admin',
-            'email' => 'Email',
+            
             'datetime_create' => 'Datetime Create',
             'datetime_update' => 'Datetime Update',
+            
             'roles' => 'Roles',
             'renderRoles' => 'Roles'
         ];

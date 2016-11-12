@@ -2,9 +2,8 @@
 
 namespace app\modules\user\components;
 
-use app\modules\user\models\User;
 use yii\web\IdentityInterface;
-
+use app\modules\user\models\User;
 /**
  * Description of UserIdentity
  *
@@ -26,22 +25,33 @@ class UserIdentity extends User implements IdentityInterface {
 
     /* -------------------- IdentityInterface Functions -------------------- */
 
+    /**
+     * @return int|string current user ID
+     */
     public function getId() {
         return $this->id;
     }
-
+    
+    /**
+     * @return User by $id
+     */
     public static function findIdentity($id) {
         return self::findOne($id);
     }
 
+    /**
+     * @return string current user auth key
+     */
     public function getAuthKey() {
-        return "11651241";
-        throw new \yii\base\NotSupportedException;
+        return $this->auth_key;
     }
 
+    /**
+     * @param string $authKey
+     * @return boolean if auth key is valid for current user
+     */
     public function validateAuthKey($authKey) {
-          return "11651241";
-        throw new \yii\base\NotSupportedException;
+        return $this->getAuthKey() === $authKey;
     }
 
     public static function findIdentityByAccessToken($token, $type = null) {

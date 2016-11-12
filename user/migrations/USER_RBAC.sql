@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `user`
   `username`        varchar(128) UNIQUE NOT NULL,
   `password`        varchar(255) NOT NULL,
 
+  `auth_key`        varchar(1024) DEFAULT NULL,
   `status`          bit(1) NOT NULL DEFAULT 1,
   `super_admin`     bit(1) NOT NULL DEFAULT 0,
 

@@ -38,7 +38,7 @@ use yii\widgets\ActiveForm;
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th class="col-lg-2 col-xs-3">#</th>
+                        <th class="col-lg-1 col-xs-2">#</th>
                         <th>Role</th>
                         <th>Description</th>
                     </tr>
