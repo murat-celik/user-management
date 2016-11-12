@@ -25,6 +25,10 @@ use app\modules\user\models\AuthAssignment;
  * @property string  $datetime_update
  */
 class User extends \yii\db\ActiveRecord {
+    
+    
+    const STATUS_ACTIVE  = 1;
+    const STATUS_PASSIVE = 2;
 
     public function beforeSave($insert) {
         if (parent::beforeSave($insert)) {

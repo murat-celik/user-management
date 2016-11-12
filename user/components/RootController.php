@@ -1,32 +1,36 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\modules\user\components;
 
 use Yii;
 use yii\web\Controller;
 
-class RootController extends Controller
-{
+class RootController extends Controller {
+
     public function beforeAction($action) {
 
-        
         if (!parent::beforeAction($action)) {
             return false;
         }
-        
+
         if (Yii::$app->user->isGuest == TRUE) {
             if ($this->route != "user/auth/login") {
                 $this->goLogin();
                 return false;
+            } elseif ($this->route == "user/auth/login") {
+                return true;
             }
         }
-        return true;
+
+        if (Yii::$app->user->Identity->isSuperAdmin) {
+            return true;
+        }
+
+        if (Yii::$app->user->can(str_replace('/', '.', $this->route))) {
+            return true;
+        } else {
+            throw new ForbiddenHttpException(Yii::t('yii', 'You are not allowed to perform this action.'));
+        }
+        return false;
     }
 
     public function actionLogout() {
@@ -41,4 +45,5 @@ class RootController extends Controller
     public function goLogin() {
         return $this->redirect(['auth/login']);
     }
+
 }
