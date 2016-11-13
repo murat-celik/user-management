@@ -12,8 +12,8 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="auth-item-update">
     <p class="pull-right">
-        <?= Html::a('Assing Child Role', ['assingchildrole',  'id' => $model->name],  ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Assing Permission', ['assingpermission', 'id' => $model->name], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Child Roles', ['childroles',  'id' => $model->name],  ['class' => 'btn btn-success btn-xs']) ?>
+        <?= Html::a('Permissions', ['permissions', 'id' => $model->name], ['class' => 'btn btn-success btn-xs']) ?>
     </p>
 
     <?=

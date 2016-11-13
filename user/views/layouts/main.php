@@ -28,7 +28,6 @@ use app\modules\user\assets\AppUserAsset;
 <body>
     <?php $this->beginBody(); ?>
 <div id="wrapper">
-    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -37,24 +36,19 @@ use app\modules\user\assets\AppUserAsset;
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">USER MANAGEMENT</a>
+            <a class="navbar-brand" href="index.php?r=user">USER MANAGEMENT</a>
         </div>
-        <!-- /.navbar-header -->
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i> (<?= Yii::$app->user->identity->fullname ?>)
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="<?= \yii\helpers\Url::to(['admin/profile']) ?>"><i class="fa fa-user fa-fw"></i> Profil</a></li>
-                    <li><a href="<?= \yii\helpers\Url::to(['admin/changepassword']) ?>"><i class="fa fa-random fa-fw"></i> Şifre Değiştir</a></li>
-                    <li class="divider"></li>
                     <li><a href="<?= \yii\helpers\Url::to(['auth/logout']) ?>"><i class="fa fa-sign-out fa-fw"></i>Çıkış</a>
                     </li>
                 </ul>
             </li>
         </ul>
-        <!-- /.navbar-top-links -->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -63,9 +57,7 @@ use app\modules\user\assets\AppUserAsset;
                 </ul>
             </div>
         </div>
-        <!-- /.navbar-static-side -->
     </nav>
-    <!-- #page wrapper -->
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="page-header">
@@ -74,7 +66,7 @@ use app\modules\user\assets\AppUserAsset;
                         <h4><?= $this->title; ?></h4>
                     </div>
                     <div class="col-sm-6 text-right">
-                        <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [], 'homeLink' => [ 'label' => Yii::t('yii', 'Home'), 'url' => 'backend.php?r=cms']]); ?>
+                        <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [], 'homeLink' => [ 'label' => Yii::t('yii', 'Home'), 'url' => 'index.php?r=user']]); ?>
                     </div>
                 </div>
             </div>
