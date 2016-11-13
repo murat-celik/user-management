@@ -27,13 +27,9 @@ use app\assets\AppAsset;
     <title>CMS</title>
     <?php echo Html::csrfMetaTags(); ?>
     <?php AppAsset::register($this); ?>
-    <!-- Bootstrap Core CSS -->
+   
     <link href="css/backend/bootstrap.css" rel="stylesheet"/>
-
     <link href="css/backend/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <script>
-        baseUrl = '<?= \yii\helpers\Url::home() ?>?r=';
-    </script>
 </head>
 <body>
     <?php $this->beginBody(); ?>
@@ -48,7 +44,6 @@ use app\assets\AppAsset;
         </div>
     </div>
 </div>
-
 <?php $this->endBody() ?>
 </body>
 </html>
