@@ -13,6 +13,7 @@ use app\modules\user\models\AuthItem;
 use app\modules\user\models\User;
 use app\modules\user\models\searchmodel\AuthItemSearch;
 use app\modules\user\components\RootController;
+use app\modules\user\components\Route;
 
 /**
  * RoleController implements the CRUD actions for AuthItem model.
@@ -180,7 +181,7 @@ class RoleController extends RootController {
     }
 
     public function actionPermissions($id) {
-        $routes = AuthItem::getRoutes();
+        $routes = Route::getRoutes();
         $childRoles = Yii::$app->authManager->getChildRoles($id);
         $childRoles = isset($childRoles) ? ArrayHelper::map($childRoles, 'name', 'name') : [];
 
