@@ -1,8 +1,5 @@
 {
     "name": "murat-celik/usermanagement",
-    "require": {
-        "murat-celik/usermanagement": "dev-master"
-    },
     "repositories": [
         {
             "type": "vcs",
