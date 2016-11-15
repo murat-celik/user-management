@@ -1,9 +1,14 @@
 # user-managment
 
 Installation
-<pre>
-  Download Manuel and create folder modules in your web app. and copy the user folder in your modules folder.
-</pre>
+
+Either run
+
+<pre> composer require murat-celik/user-management</pre>
+Or
+<br>
+
+Download Manuel and create folder modules in your web app. and copy the user folder in your modules folder.
 
 Configuration
 <br>
@@ -41,6 +46,7 @@ Configuration
  </pre>
  <pre>
  class  CustomController extends RootController {
+ 
  }
  </pre>
     
