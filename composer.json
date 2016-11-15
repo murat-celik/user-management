@@ -1,4 +1,6 @@
 {
+    "name": "murat-celik/user-management",
+    "minimum-stability": "dev",
     "require": {
         "murat-celik/user-management": "dev-master"
     },
