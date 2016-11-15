@@ -1,11 +1,11 @@
 {
-	"name": "muratcelik/user-management",
-	"description": "User with improved RBAC",
-	"autoload": {
-		"psr-4": {
-			"muratcelik\\modules\\user\\": ""
-		}
-	},
-	"require": {
-	}
+    "require": {
+        "murat-celik/user-management": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/murat-celik/user-management.git"
+        }
+    ]
 }
