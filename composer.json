@@ -1,12 +1,12 @@
 {
-    "name": "murat-celik/user-management",
+    "name": "murat-celik/usermanagement",
     "require": {
         "murat-celik/user-management": "dev-master"
     },
     "repositories": [
         {
             "type": "vcs",
-            "url":  "https://github.com/murat-celik/user-management.git"
+            "url":  "https://github.com/murat-celik/usermanagement.git"
         }
     ],
     "minimum-stability": "dev"

@@ -4,7 +4,7 @@ Installation
 
 Either run
 ```php
-  composer require murat-celik/user-management
+  composer require murat-celik/usermanagement
 ```
 Or
 <br>
