@@ -3,8 +3,9 @@
 Installation
 
 Either run
-
-<pre> composer require murat-celik/user-management</pre>
+```php
+  composer require murat-celik/user-management
+```
 Or
 <br>
 
@@ -13,20 +14,19 @@ Download Manuel and create folder modules in your web app. and copy the user fol
 Configuration
 <br>
 1) In your config/web.php change your home url after login redirect anywhere.
-<pre>
+```php
   'homeUrl'=>'site/index',
-</pre>
+```
 
 2) In your config/web.php
-<pre>
+```php
 'modules' => [
         'user' => [
             'class' => 'app\modules\user\UserModule',
         ],
     ],
-</pre>  
- 
-<pre> 
+```
+```php
  'components' => [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
@@ -36,17 +36,16 @@ Configuration
             'enableAutoLogin' => true,
         ],
     ]
- </pre>
+```
  
  3) Execute sql script file in modules/user/migrations/USER_RBAC.sql
 
  4) Extend your CustomController based RootController 
- <pre>
+```php
   use app\modules\user\components\RootController;
- </pre>
- <pre>
- class  CustomController extends RootController {
- 
- }
- </pre>
+```
+```php
+class  CustomController extends RootController {
+}
+```
     
