@@ -1,7 +1,7 @@
 {
     "name": "murat-celik/usermanagement",
     "require": {
-        "murat-celik/user-management": "dev-master"
+        "murat-celik/usermanagement": "dev-master"
     },
     "repositories": [
         {
