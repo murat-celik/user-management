@@ -1,0 +1,11 @@
+{
+	"name": "muratcelik/user-management",
+	"description": "User with improved RBAC",
+	"autoload": {
+		"psr-4": {
+			"muratcelik\\modules\\user\\": ""
+		}
+	},
+	"require": {
+	}
+}
